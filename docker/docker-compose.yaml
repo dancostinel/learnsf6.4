@@ -1,0 +1,53 @@
+version: '3'
+volumes:
+    mysql_data:
+services:
+    sf64-1-nginx-service:
+        build:
+            context: .
+            dockerfile: ./nginx/Dockerfile
+        container_name: sf64-1-nginx-container
+        volumes:
+            - ./../:/var/www/sf64-1/
+        ports: ['8551:80']
+        networks:
+            - sf64-1-network
+    sf64-1-php-service:
+        build:
+            context: .
+            dockerfile: ./php/Dockerfile
+        container_name: sf64-1-php-container
+        ports: ['9551:9000']
+        volumes:
+            - ./../:/var/www/sf64-1/
+            - ./../vendor:/var/www/sf64-1/vendor
+        networks:
+            - sf64-1-network
+    sf64-1-mysql-service:
+        image: mysql
+        container_name: sf64-1-mysql-container
+        command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--authentication_policy=mysql_native_password']
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+        ports: ['3556:3306']
+        volumes:
+            - ./mysql:/var/lib/mysql
+        networks:
+            - sf64-1-network
+    sf64-1-phpmyadmin-service:
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: sf64-1-phpmyadmin-container
+        environment:
+            PMA_HOST: sf64-1-mysql-service
+            PMA_USER: root
+            PMA_PASSWORD: root
+        ports: ['8552:80']
+        depends_on:
+            - sf64-1-mysql-service
+        volumes:
+            - ./phpmyadmin/:/var/www/sf64-1/docker/phpmyadmin/
+        networks:
+            - sf64-1-network
+networks:
+    sf64-1-network:
+        driver: bridge
