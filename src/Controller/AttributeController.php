@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class AttributeController extends AbstractController
 {
     #[Route('/attribute', name: 'route_attribute', methods: ['GET'])]
-    public function test(): JsonResponse
+    public function testAttributeRoute(): JsonResponse
     {
         return new JsonResponse(['route' => 'attribute']);
     }

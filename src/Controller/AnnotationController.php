@@ -15,6 +15,6 @@ class AnnotationController extends AbstractController
      */
     public function testAnnotationRoute(): JsonResponse
     {
-        return new JsonResponse(['route' => 'attribute']);
+        return new JsonResponse(['route' => 'annotation']);
     }
 }
