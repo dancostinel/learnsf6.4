@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TestRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -43,6 +45,14 @@ class Test
 
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2, nullable: true)]
     private ?string $field10 = null;
+
+    #[ORM\OneToMany(mappedBy: 'field8', targetEntity: Test2::class)]
+    private Collection $test2s;
+
+    public function __construct()
+    {
+        $this->test2s = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -165,6 +175,36 @@ class Test
     public function setField10(?string $field10): static
     {
         $this->field10 = $field10;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Test2>
+     */
+    public function getTest2s(): Collection
+    {
+        return $this->test2s;
+    }
+
+    public function addTest2(Test2 $test2): static
+    {
+        if (!$this->test2s->contains($test2)) {
+            $this->test2s->add($test2);
+            $test2->setField8($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTest2(Test2 $test2): static
+    {
+        if ($this->test2s->removeElement($test2)) {
+            // set the owning side to null (unless already changed)
+            if ($test2->getField8() === $this) {
+                $test2->setField8(null);
+            }
+        }
 
         return $this;
     }
