@@ -51,7 +51,7 @@ class Test2
         return $this->field1;
     }
 
-    public function setField1(string $field1): static
+    public function setField1(string $field1): self
     {
         $this->field1 = $field1;
 
@@ -63,7 +63,7 @@ class Test2
         return $this->field2;
     }
 
-    public function setField2(string $field2): static
+    public function setField2(string $field2): self
     {
         $this->field2 = $field2;
 
@@ -75,7 +75,7 @@ class Test2
         return $this->field3;
     }
 
-    public function setField3(bool $field3): static
+    public function setField3(bool $field3): self
     {
         $this->field3 = $field3;
 
@@ -87,7 +87,7 @@ class Test2
         return $this->field4;
     }
 
-    public function setField4(int $field4): static
+    public function setField4(int $field4): self
     {
         $this->field4 = $field4;
 
@@ -99,7 +99,7 @@ class Test2
         return $this->field5;
     }
 
-    public function setField5(int $field5): static
+    public function setField5(int $field5): self
     {
         $this->field5 = $field5;
 
@@ -111,7 +111,7 @@ class Test2
         return $this->field6;
     }
 
-    public function setField6(string $field6): static
+    public function setField6(string $field6): self
     {
         $this->field6 = $field6;
 
@@ -123,7 +123,7 @@ class Test2
         return $this->field7;
     }
 
-    public function setField7(float $field7): static
+    public function setField7(float $field7): self
     {
         $this->field7 = $field7;
 
@@ -135,7 +135,7 @@ class Test2
         return $this->field8;
     }
 
-    public function setField8(?Test $field8): static
+    public function setField8(?Test $field8): self
     {
         $this->field8 = $field8;
 
@@ -147,7 +147,7 @@ class Test2
         return $this->field9;
     }
 
-    public function setField9(array $field9): static
+    public function setField9(array $field9): self
     {
         $this->field9 = $field9;
 
